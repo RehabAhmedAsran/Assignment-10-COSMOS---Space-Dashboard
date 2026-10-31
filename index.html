@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOS - Space Dashboard</title>
+    <link rel="icon" href="./assets/images/favicon.png" />
+    <script>
+      window.FontAwesomeConfig = { autoReplaceSvg: "nest" };
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body
+    class="bg-linear-to-br from-space-dark via-slate-900 to-space-blue font-inter text-white"
+  >
+    <aside
+      id="sidebar"
+      class="fixed top-0 left-0 h-full w-64 bg-slate-900 border-r border-slate-800 flex flex-col transition-transform duration-300 sidebar-mobile"
+    >
+      <div class="p-4 border-b border-slate-800">
+        <div class="flex items-center space-x-3">
+          <div
+            class="w-10 h-10 bg-linear-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center"
+          >
+            <i class="fas fa-rocket text-white text-lg"></i>
+          </div>
+          <div>
+            <h1
+              class="text-lg font-space font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+            >
+              COSMOS
+            </h1>
+            <p class="text-xs text-slate-400">Space Dashboard</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+        <a
+          href="#"
+          data-section="today-in-space"
+          class="nav-link flex items-center space-x-3 px-3 py-2.5 bg-blue-500/10 text-blue-400 rounded-lg font-medium transition-colors"
+        >
+          <i class="fas fa-image w-5"></i>
+          <span>Today in Space</span>
+        </a>
+        <a
+          href="#"
+          data-section="launches"
+          class="nav-link flex items-center space-x-3 px-3 py-2.5 text-slate-300 hover:bg-slate-800 rounded-lg font-medium transition-colors"
+        >
+          <i class="fas fa-rocket w-5"></i>
+          <span>Launches</span>
+        </a>
+        <a
+          href="#"
+          data-section="planets"
+          class="nav-link flex items-center space-x-3 px-3 py-2.5 text-slate-300 hover:bg-slate-800 rounded-lg font-medium transition-colors"
+        >
+          <i class="fas fa-globe w-5"></i>
+          <span>Planets</span>
+        </a>
+      </nav>
+
+      <div class="p-4 border-t border-slate-800">
+        <div
+          class="flex items-center space-x-3 px-3 py-2 bg-slate-800 rounded-lg cursor-pointer hover:bg-slate-700 transition-colors"
+        >
+          <div
+            class="w-8 h-8 bg-linear-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-user text-white text-sm"></i>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm font-semibold">Space Explorer</p>
+            <p class="text-xs text-slate-400">explorer@cosmos.space</p>
+          </div>
+          <i class="fas fa-ellipsis-v text-slate-400"></i>
+        </div>
+      </div>
+    </aside>
+
+    <header
+      id="header"
+      class="fixed top-0 left-0 lg:left-64 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800"
+    >
+      <div class="px-4 lg:px-8 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3 lg:space-x-6">
+            <button
+              id="sidebar-toggle"
+              class="lg:hidden w-10 h-10 flex items-center justify-center bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors"
+            >
+              <i class="fas fa-bars text-white"></i>
+            </button>
+            <div>
+              <h2
+                class="text-lg lg:text-xl font-space font-bold bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+              >
+                Space Explorer Dashboard
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5 hidden sm:block">
+                Real-time space data from NASA & SpaceDevs
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-2 md:space-x-4">
+            <div
+              class="flex items-center space-x-2 md:space-x-3 px-2 md:px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-xl"
+            >
+              <div class="flex items-center space-x-1 md:space-x-2">
+                <div
+                  class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                ></div>
+                <span class="text-xs text-slate-400 hidden sm:inline"
+                  >Live Data</span
+                >
+              </div>
+              <div class="w-px h-4 bg-slate-700 hidden sm:block"></div>
+              <div class="flex items-center space-x-1 md:space-x-2">
+                <i class="fas fa-globe text-blue-400 text-sm"></i>
+                <span
+                  class="text-xs text-slate-300 font-semibold hidden sm:inline"
+                  >8 Planets</span
+                >
+                <span class="text-xs text-slate-300 font-semibold sm:hidden"
+                  >8</span
+                >
+              </div>
+              <div class="w-px h-4 bg-slate-700 hidden sm:block"></div>
+              <div class="flex items-center space-x-1 md:space-x-2">
+                <i class="fas fa-rocket text-purple-400 text-sm"></i>
+                <span
+                  class="text-xs text-slate-300 font-semibold hidden sm:inline"
+                  id="launches-count"
+                  >10 Launches</span
+                >
+                <span
+                  class="text-xs text-slate-300 font-semibold sm:hidden"
+                  id="launches-count-mobile"
+                  >10</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="ml-0 lg:ml-64 mt-[90px]">
+      <section
+        id="today-in-space"
+        data-section="today-in-space"
+        class="app-section py-4 lg:py-8 px-4 lg:px-6 bg-slate-900/50"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6"
+          >
+            <div>
+              <h2 class="text-xl md:text-2xl font-space font-bold mb-1">
+                Today in Space
+              </h2>
+              <p id="apod-date" class="text-slate-400 text-xs md:text-sm">
+                Astronomy Picture of the Day - Loading...
+              </p>
+            </div>
+            <div class="flex items-center space-x-2 md:space-x-3">
+              <label for="apod-date-input" class="date-input-wrapper">
+                <input
+                  type="date"
+                  id="apod-date-input"
+                  class="custom-date-input"
+                  max=""
+                  min="1995-06-16"
+                />
+              </label>
+              <button
+                id="load-date-btn"
+                class="px-3 md:px-4 py-2 bg-blue-500 rounded-xl hover:bg-blue-600 transition-colors font-semibold text-sm flex items-center space-x-1 md:space-x-2"
+              >
+                <i class="fas fa-search"></i>
+                <span class="hidden sm:inline">Load</span>
+              </button>
+              <button
+                id="today-apod-btn"
+                class="px-3 md:px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl hover:bg-slate-700 transition-colors font-semibold text-sm"
+              >
+                Today
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+            <div class="xl:col-span-2">
+              <div
+                id="apod-image-container"
+                class="relative rounded-2xl overflow-hidden group h-[300px] md:h-[400px] lg:h-[600px] bg-slate-800/50 flex items-center justify-center"
+              >
+                <div id="apod-loading" class="text-center">
+                  <i
+                    class="fas fa-spinner fa-spin text-4xl text-blue-400 mb-4"
+                  ></i>
+                  <p class="text-slate-400">Loading today's image...</p>
+                </div>
+                <img
+                  id="apod-image"
+                  class="w-full h-full object-cover hidden"
+                  src=""
+                  alt=""
+                />
+                <div
+                  class="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <div class="absolute bottom-6 left-6 right-6">
+                    <button
+                      class="w-full py-3 bg-white/10 backdrop-blur-md rounded-lg font-semibold hover:bg-white/20 transition-colors"
+                    >
+                      <i class="fas fa-expand mr-2"></i>View Full Resolution
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-4 md:space-y-6">
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-xl md:rounded-2xl p-4 md:p-6"
+              >
+                <h3
+                  id="apod-title"
+                  class="text-lg md:text-2xl font-semibold mb-3 md:mb-4"
+                >
+                  Loading...
+                </h3>
+                <div
+                  class="flex items-center space-x-4 mb-4 text-sm text-slate-400"
+                >
+                  <span id="apod-date-detail"
+                    ><i class="far fa-calendar mr-2"></i>Loading...</span
+                  >
+                </div>
+                <p
+                  id="apod-explanation"
+                  class="text-slate-300 leading-relaxed mb-4"
+                >
+                  Loading description...
+                </p>
+                <div
+                  id="apod-copyright"
+                  class="text-xs text-slate-400 italic mb-4 hidden"
+                ></div>
+              </div>
+
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6"
+              >
+                <h4 class="font-semibold mb-3 flex items-center">
+                  <i class="fas fa-info-circle text-blue-400 mr-2"></i>
+                  Image Details
+                </h4>
+                <div class="space-y-3 text-sm">
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Date</span>
+                    <span id="apod-date-info" class="font-medium"
+                      >Loading...</span
+                    >
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Media Type</span>
+                    <span id="apod-media-type" class="font-medium">Image</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Source</span>
+                    <span class="font-medium">NASA APOD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="launches"
+        data-section="launches"
+        class="app-section hidden py-4 lg:py-8 px-4 lg:px-6 bg-slate-900/50"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="mb-6 md:mb-8">
+            <h2 class="text-2xl md:text-3xl font-space font-bold mb-2">
+              Upcoming Launches
+            </h2>
+            <p class="text-slate-400 text-sm md:text-base">
+              Real-time tracking of the next missions to space
+            </p>
+          </div>
+
+          <div id="featured-launch" class="mb-8">
+            <!-- Featured launch will be populated by JavaScript -->
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-4">All Upcoming Launches</h3>
+          </div>
+
+          <div
+            id="launches-grid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <!-- Launches grid will be populated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="planets"
+        data-section="planets"
+        class="app-section hidden py-4 lg:py-8 px-4 lg:px-6 bg-slate-900/50"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="mb-4 md:mb-6">
+            <h2 class="text-xl md:text-2xl font-space font-bold mb-1">
+              Explore Our Solar System
+            </h2>
+            <p class="text-slate-400 text-xs md:text-sm">
+              Discover the planets, moons, and celestial bodies in our cosmic
+              neighborhood
+            </p>
+          </div>
+
+          <div
+            id="planets-grid"
+            class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 xl:grid-cols-8 gap-3 md:gap-4 mb-8 md:mb-12"
+          >
+            <!-- Planets will be populated by JavaScript -->
+          </div>
+
+          <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-6">
+            <div
+              class="xl:col-span-2 bg-slate-800/50 border border-slate-700 rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8"
+            >
+              <div
+                class="flex flex-col xl:flex-row xl:items-start space-y-4 xl:space-y-0"
+              >
+                <div
+                  class="relative h-48 w-48 md:h-64 md:w-64 shrink-0 mx-auto xl:mr-6"
+                >
+                  <img
+                    id="planet-detail-image"
+                    class="w-full h-full object-contain"
+                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/d982a2d8e0-19ba0b138aa6ad763930.png"
+                    alt="earth planet detailed realistic render with clouds and continents"
+                  />
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-3 md:mb-4">
+                    <h3
+                      id="planet-detail-name"
+                      class="text-2xl md:text-3xl font-space font-bold"
+                    >
+                      Earth
+                    </h3>
+                    <button
+                      class="w-10 h-10 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors"
+                    >
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </div>
+                  <p
+                    id="planet-detail-description"
+                    class="text-slate-300 mb-4 md:mb-6 leading-relaxed text-sm md:text-base"
+                  >
+                    Earth is the third planet from the Sun and the only
+                    astronomical object known to harbor life. About 29% of
+                    Earth's surface is land consisting of continents and
+                    islands. The remaining 71% is covered with water, mostly by
+                    oceans, seas, gulfs, and other salt-water bodies, but also
+                    by lakes, rivers, and other fresh water, which together
+                    constitute the hydrosphere.
+                  </p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 md:gap-4 mt-4">
+                <div class="bg-slate-900/50 rounded-lg p-3 md:p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-ruler text-xs"></i>
+                    <span class="text-xs">Semimajor Axis</span>
+                  </p>
+                  <p
+                    id="planet-distance"
+                    class="text-sm md:text-lg font-semibold"
+                  >
+                    149.6M km
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-circle"></i>
+                    Mean Radius
+                  </p>
+                  <p id="planet-radius" class="text-lg font-semibold">
+                    6,371 km
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-weight"></i>
+                    Mass
+                  </p>
+                  <p id="planet-mass" class="text-lg font-semibold">
+                    5.97 × 10²⁴ kg
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-compress"></i>
+                    Density
+                  </p>
+                  <p id="planet-density" class="text-lg font-semibold">
+                    5.51 g/cm³
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-sync-alt"></i>
+                    Orbital Period
+                  </p>
+                  <p id="planet-orbital-period" class="text-lg font-semibold">
+                    365.25 days
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-redo"></i>
+                    Rotation Period
+                  </p>
+                  <p id="planet-rotation" class="text-lg font-semibold">
+                    24 hours
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-moon"></i>
+                    Moons
+                  </p>
+                  <p id="planet-moons" class="text-lg font-semibold">1</p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-arrows-alt-v"></i>
+                    Gravity
+                  </p>
+                  <p id="planet-gravity" class="text-lg font-semibold">
+                    9.8 m/s²
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6"
+              >
+                <h4 class="font-semibold mb-4 flex items-center">
+                  <i class="fas fa-user-astronaut text-purple-400 mr-2"></i>
+                  Discovery Info
+                </h4>
+                <div class="space-y-3 text-sm">
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Discovered By</span>
+                    <span
+                      id="planet-discoverer"
+                      class="font-semibold text-right"
+                      >Known since antiquity</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Discovery Date</span>
+                    <span id="planet-discovery-date" class="font-semibold"
+                      >Ancient</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Body Type</span>
+                    <span id="planet-body-type" class="font-semibold"
+                      >Planet</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center py-2">
+                    <span class="text-slate-400">Volume</span>
+                    <span id="planet-volume" class="font-semibold">N/A</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6"
+              >
+                <h4 class="font-semibold mb-4 flex items-center">
+                  <i class="fas fa-lightbulb text-yellow-400 mr-2"></i>
+                  Quick Facts
+                </h4>
+                <ul id="planet-facts" class="space-y-3 text-sm">
+                  <li class="flex items-start">
+                    <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                    <span class="text-slate-300"
+                      >Only known planet with liquid water</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                    <span class="text-slate-300"
+                      >Atmosphere contains 78% nitrogen</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                    <span class="text-slate-300"
+                      >Magnetic field protects from solar wind</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                    <span class="text-slate-300"
+                      >Formed 4.54 billion years ago</span
+                    >
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6"
+              >
+                <h4 class="font-semibold mb-4 flex items-center">
+                  <i class="fas fa-satellite text-blue-400 mr-2"></i>
+                  Orbital Characteristics
+                </h4>
+                <div class="space-y-3 text-sm">
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Perihelion</span>
+                    <span id="planet-perihelion" class="font-semibold"
+                      >147.1M km</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Aphelion</span>
+                    <span id="planet-aphelion" class="font-semibold"
+                      >152.1M km</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Eccentricity</span>
+                    <span id="planet-eccentricity" class="font-semibold"
+                      >0.0167</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Inclination</span>
+                    <span id="planet-inclination" class="font-semibold"
+                      >0.00°</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Axial Tilt</span>
+                    <span id="planet-axial-tilt" class="font-semibold"
+                      >23.44°</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Avg Temperature</span>
+                    <span id="planet-temp" class="font-semibold">15°C</span>
+                  </div>
+                  <div class="flex justify-between items-center py-2">
+                    <span class="text-slate-400">Escape Velocity</span>
+                    <span id="planet-escape" class="font-semibold"
+                      >11.2 km/s</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <button
+                class="w-full py-3 bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors font-semibold"
+              >
+                <i class="fas fa-book mr-2"></i>Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="planet-comparison"
+        data-section="planets"
+        class="app-section hidden py-4 lg:py-8 px-4 lg:px-6"
+      >
+        <div class="max-w-7xl mx-auto">
+          <h2 class="text-xl md:text-2xl font-space font-bold mb-4 md:mb-6">
+            Planet Comparison
+          </h2>
+
+          <div
+            class="bg-slate-800/50 border border-slate-700 rounded-xl md:rounded-2xl overflow-hidden"
+          >
+            <div class="overflow-x-auto custom-scrollbar">
+              <table class="w-full min-w-[800px]">
+                <thead class="bg-slate-900/50">
+                  <tr>
+                    <th
+                      class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap sticky left-0 bg-slate-900 z-10"
+                    >
+                      Planet
+                    </th>
+                    <th
+                      class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                    >
+                      Distance (AU)
+                    </th>
+                    <th
+                      class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                    >
+                      Diameter (km)
+                    </th>
+                    <th
+                      class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                    >
+                      Mass (Earth=1)
+                    </th>
+                    <th
+                      class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                    >
+                      Orbital Period
+                    </th>
+                    <th
+                      class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                    >
+                      Moons
+                    </th>
+                    <th
+                      class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                    >
+                      Type
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="planet-comparison-tbody"
+                  class="divide-y divide-slate-700"
+                >
+                  <!-- Planets will be populated by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="assets/js/index.js"></script>
+  </body>
+</html>
